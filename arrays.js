@@ -33,20 +33,92 @@ const forMapReturn = arr.map((value, index) => {
     return value * 2;
 })
 
-console.log({forEachReturn, forMapReturn, arr})
+// console.log({forEachReturn, forMapReturn, arr})
 
 const arr2 = [{
     firstName: 'mani',
     lastName: 'sasikumar',
     age: 26,
+    salary: 1000,
+    org: 'concentrix'
 }, {
     firstName: 'mani2',
     lastName: 'sasikumar2',
     age: 29,
+    salary: 2000,
+    org: 'aspire'
 }, {
     firstName: 'mani3',
     lastName: 'sasikumar3',
     age: 32,
+    salary: 3000,
+    org: 'deloitte'
 }]
 
 // filter, find, findIndex, reduce
+
+
+const filteredArray = arr2.filter((data, index) => {
+    return data.age > 28;
+})
+// console.log({filteredArray})
+
+const firstMatched = arr2.find((data, index) => {
+    return data.age > 28;
+})
+// console.log({firstMatched})
+
+const firstMatchedIndex = arr2.findIndex((data, index) => {
+    return data.age > 48;
+})
+// console.log({firstMatchedIndex})
+
+const allMatched = arr2.every((data) => {
+    return data.age > 28
+})
+
+const anyOneMatch = arr2.some((data) => {
+    return data.age > 28
+})
+
+// console.log({allMatched, anyOneMatch})
+
+const sum = arr2.reduce((previousValue, currentValue, currentIndex) => {
+    // console.log({previousValue, currentIndex, currentValue})
+    if (currentValue.age > 28)
+        previousValue += currentValue.salary;
+    return previousValue
+}, 0)
+
+// console.log(sum)
+
+// {aspire: [], deloitte: [], concentrix: []}
+
+
+// {concentrix: [{}]}
+const groupEmployee = arr2.reduce((prevVal, currentValue) => {
+    const { org } = currentValue;
+    if(!prevVal[org]) {
+        prevVal[org] = [];
+    }
+    // if (prevVal[org]) {
+        prevVal[org].push(currentValue);
+    // } else {
+    //     prevVal[org] = [];
+    //     prevVal[org].push(currentValue);
+    // }
+    return prevVal;
+}, {})
+
+// console.log(groupEmployee)
+
+// {
+//     aspire: {
+//         totalEmployee: <count>,
+//         totalSalary: <sum of salary>
+//     }
+//     concentrix: {
+//         totalEmployee: <count>,
+//         totalSalary: <sum of salary>
+//     }
+// }
